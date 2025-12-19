@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "Financial Ledger API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Double-entry bookkeeping financial ledger API"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8000/health"
+      }
+    },
+    {
+      "name": "Create Account",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://127.0.0.1:8000/accounts?user_id={{user_id}}&account_type=checking&currency=USD",
+          "host": ["http://127.0.0.1:8000"],
+          "path": ["accounts"],
+          "query": [
+            { "key": "user_id", "value": "{{user_id}}" },
+            { "key": "account_type", "value": "checking" },
+            { "key": "currency", "value": "USD" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Second Account",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://127.0.0.1:8000/accounts?user_id={{user_id}}&account_type=savings&currency=USD",
+          "host": ["http://127.0.0.1:8000"],
+          "path": ["accounts"],
+          "query": [
+            { "key": "user_id", "value": "{{user_id}}" },
+            { "key": "account_type", "value": "savings" },
+            { "key": "currency", "value": "USD" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deposit",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/deposit?account_id={{account_1}}&amount=1000&currency=USD",
+          "host": ["http://127.0.0.1:8000"],
+          "path": ["transactions", "deposit"],
+          "query": [
+            { "key": "account_id", "value": "{{account_1}}" },
+            { "key": "amount", "value": "1000" },
+            { "key": "currency", "value": "USD" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Transfer",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/transfer?source_account_id={{account_1}}&destination_account_id={{account_2}}&amount=300&currency=USD",
+          "host": ["http://127.0.0.1:8000"],
+          "path": ["transactions", "transfer"],
+          "query": [
+            { "key": "source_account_id", "value": "{{account_1}}" },
+            { "key": "destination_account_id", "value": "{{account_2}}" },
+            { "key": "amount", "value": "300" },
+            { "key": "currency", "value": "USD" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Withdraw",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://127.0.0.1:8000/transactions/withdraw?account_id={{account_2}}&amount=100&currency=USD",
+          "host": ["http://127.0.0.1:8000"],
+          "path": ["transactions", "withdraw"],
+          "query": [
+            { "key": "account_id", "value": "{{account_2}}" },
+            { "key": "amount", "value": "100" },
+            { "key": "currency", "value": "USD" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Account Balance",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8000/accounts/{{account_1}}"
+      }
+    },
+    {
+      "name": "Get Account Ledger",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8000/accounts/{{account_1}}/ledger"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "user_id", "value": "00000000-0000-0000-0000-000000000001" },
+    { "key": "account_1", "value": "" },
+    { "key": "account_2", "value": "" }
+  ]
+}
